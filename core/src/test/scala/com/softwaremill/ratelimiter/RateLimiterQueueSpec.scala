@@ -16,12 +16,6 @@ class RateLimiterQueueSpec extends WordSpec with Matchers {
 
       actal shouldBe RateLimiterQueue(1, 1000, Queue(), Queue(), scheduled = false)
     }
-    "enqueue" in {
-      val q1: RateLimiterQueue[IO[Nothing, Unit]] = RateLimiterQueue(1, 1000).enqueue(IO.sync(println("task1")))
-      val q2: RateLimiterQueue[IO[Nothing, Unit]] = q1.enqueue(IO.sync(println("task2")))
-
-      val i = 10
-    }
     "run" in {
       val io1 = IO.sync(println("task1"))
       val io2 = IO.sync(println("task2"))
