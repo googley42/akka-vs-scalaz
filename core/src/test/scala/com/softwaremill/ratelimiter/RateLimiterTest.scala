@@ -11,7 +11,7 @@ import scala.concurrent.duration._
 trait RateLimiterTest extends FlatSpec with Matchers with Eventually {
   def doTest[F[_], RL](name: String, create: Int => FiniteDuration => RateLimiter): Unit = {
     name should "rate limit futures scheduled upfront" in {
-      val rateLimiter = create(2)(1.second)
+      val rateLimiter: RateLimiter = create(2)(1.second)
       val complete = new AtomicReference(Vector.empty[Int])
       for (i <- 1 to 7) {
         rateLimiter.runLimited {
